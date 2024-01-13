@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Travel_Itinerary.Server.Data;
 using Travel_Itinerary.Server.Models;
 using Microsoft.AspNetCore.Identity;
+using Travel_Itinerary.Server.IRepository;
+using Travel_Itinerary.Server.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,8 @@ builder.Services.AddIdentityServer()
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
+
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

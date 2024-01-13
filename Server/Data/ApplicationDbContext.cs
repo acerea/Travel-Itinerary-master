@@ -27,7 +27,18 @@ namespace Travel_Itinerary.Server.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.ApplyConfiguration(new ColourSeedConfiguration());
-        }
+
+			builder.ApplyConfiguration(new MakeSeedConfiguration());
+
+			builder.ApplyConfiguration(new ModelSeedConfiguration());
+
+			builder.ApplyConfiguration(new RoleSeedConfiguration());
+
+			builder.ApplyConfiguration(new UserRoleSeedConfiguration());
+
+			builder.ApplyConfiguration(new UserSeedConfiguration());
+		}
     }
 }

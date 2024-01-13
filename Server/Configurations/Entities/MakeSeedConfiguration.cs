@@ -21,7 +21,7 @@ namespace Travel_Itinerary.Server.Configurations.Entities
                 new Make
                 {
                     Id = 2,
-                    Name = "Toyata",
+                    Name = "Toyota",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",

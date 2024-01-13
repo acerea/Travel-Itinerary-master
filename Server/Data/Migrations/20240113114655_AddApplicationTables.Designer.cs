@@ -12,7 +12,7 @@ using Travel_Itinerary.Server.Data;
 namespace Travel_Itinerary.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240112040700_AddApplicationTables")]
+    [Migration("20240113114655_AddApplicationTables")]
     partial class AddApplicationTables
     {
         /// <inheritdoc />
@@ -191,6 +191,20 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -280,6 +294,13 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -372,6 +393,26 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d6629d02-73a5-4291-b188-2c4506c4386e",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFZ8b9tTkF23+Fw/dz9ok2Gnt3t+piDZc3ApkFhmC1CkZkyU2gn83+YhKJ5fgH1evQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a7e883b1-f23f-442f-9b1b-26fc796c4693",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@localhost.com"
+                        });
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Booking", b =>
@@ -412,7 +453,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Colour", b =>
@@ -440,7 +481,27 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colour");
+                    b.ToTable("Colours");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4507),
+                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4527),
+                            Name = "Black",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4531),
+                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4532),
+                            Name = "Blue",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Customer", b =>
@@ -483,7 +544,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Make", b =>
@@ -511,7 +572,27 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Make");
+                    b.ToTable("Makes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4962),
+                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4963),
+                            Name = "BMW",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4966),
+                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4967),
+                            Name = "Toyota",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Model", b =>
@@ -539,7 +620,27 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Model");
+                    b.ToTable("Models");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(5229),
+                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(5230),
+                            Name = "3 Series",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(5233),
+                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(5233),
+                            Name = "X5",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Vehicle", b =>
@@ -585,7 +686,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("Vehicle");
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
