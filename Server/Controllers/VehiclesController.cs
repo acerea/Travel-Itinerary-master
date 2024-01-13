@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CarRentalManagement.Server.Data;
-using CarRentalManagement.Shared.Domain;
-using CarRentalManagement.Server.IRepository;
+using Travel_Itinerary.Server.Data;
+using Travel_Itinerary.Shared.Domain;
+using Travel_Itinerary.Server.IRepository;
 using Duende.IdentityServer.Validation;
 
-namespace CarRentalManagement.Server.Controllers
+namespace Travel_Itinerary.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -29,7 +29,7 @@ namespace CarRentalManagement.Server.Controllers
         [HttpGet]
 		public async Task<IActionResult> GetVehicles()
 		{
-			var Vehicles = await _unitOfWork.Vehicles.GetAll(includes: q => q.Include(x => x.Make).Include(x => x.Model).Include(x => x.Color));
+			var Vehicles = await _unitOfWork.Vehicles.GetAll(includes: q => q.Include(x => x.Make).Include(x => x.Model).Include(x => x.Colour));
 			return Ok(Vehicles);
 		}
 		// GET: api/Vehicles/5
