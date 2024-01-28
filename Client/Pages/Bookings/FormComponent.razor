@@ -1,0 +1,85 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@booking" OnValidSubmit="OnValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<fieldset disabled="@Disabled">
+		<div class="form-group">
+			<label>Customer: </label>
+			<div>
+				<InputSelect @bind-Value="booking.CustomerId" class="form-control">
+					<option value="">-- Select Customer --</option>
+					@if (Customers != null)
+					{
+						foreach (var customer in Customers)
+						{
+							<option value="@customer.Id">@customer.CusFirstName @customer.CusLastName</option>
+						}
+					}
+				</InputSelect>
+				<ValidationMessage For="@(() => booking.CustomerId)" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Location: </label>
+			<div>
+				<InputText @bind-Value="booking.BookingLocation" class="form-control" placeholder="e.g. Louie Hotel" />
+				<ValidationMessage For="@(() => booking.BookingLocation)" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Email: </label>
+			<div>
+				<InputText @bind-Value="booking.BookingEmail" class="form-control" placeholder="e.g. miaripes@gmail.com" />
+				<ValidationMessage For="@(() => booking.BookingEmail)" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Date In: </label>
+			<div>
+				<InputDate @bind-Value="booking.DateIn" class="form-control">
+				</InputDate>
+				<ValidationMessage For="@(() => booking.DateIn)" />
+			</div>
+		</div>
+
+	@if (booking.Id > 0)
+	{
+		<div class="form-group">
+			<label>Date Out: </label>
+			<div>
+				<InputDate @bind-Value="@booking.DateOut" class="form-control" />
+				<ValidationMessage For="@(() => booking.DateOut)" />
+			</div>
+		</div>
+	}
+	</fieldset>
+
+	<br />
+	
+	@if (!Disabled)
+	{
+		<button type="submit" class="btn btn-success btn-block">
+			@ButtonText
+		</button>
+	}
+
+	<BackToList Target="bookings" />
+</EditForm>
+
+@code {
+	[Parameter] public Booking? booking { get; set; }
+	[Parameter] public string ButtonText { get; set; } = "Save";
+	[Parameter] public EventCallback OnValidSubmit { get; set; }
+
+	[Parameter] public bool Disabled { get; set; } = false;
+
+	private IList<Customer>? Customers;
+
+	protected async override Task OnInitializedAsync()
+	{
+		Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+
+	}
+}

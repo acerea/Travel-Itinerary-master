@@ -1,0 +1,24 @@
+﻿@page "/traveldocs/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Travel Document</h3>
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditTravelDocs" traveldocs="traveldocs" />
+
+@code {
+	[Parameter] public int id { get; set; }
+	TravelDocs? traveldocs = new TravelDocs();
+
+	protected async override Task OnParametersSetAsync()
+	{
+		traveldocs = await
+		_client.GetFromJsonAsync<TravelDocs>($"{Endpoints.TravelDocsEndpoint}/{id}");
+	}
+
+	async Task EditTravelDocs()
+	{
+		await _client.PutAsJsonAsync($"{Endpoints.TravelDocsEndpoint}/{id}", traveldocs);
+		_navManager.NavigateTo("/traveldocs/");
+	}
+}

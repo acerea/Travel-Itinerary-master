@@ -1,0 +1,54 @@
+﻿<EditForm Model="@traveldocs" OnValidSubmit="OnValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+	<fieldset disabled="@Disabled">
+		<div class="form-group">
+			<label>Name: </label>
+			<div>
+				<InputText @bind-Value="traveldocs.TravelName" class="form-control" placeholder="e.g. Trip to Manila" />
+				<ValidationMessage For="@(() => traveldocs.TravelName)" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Name: </label>
+			<div>
+				<InputText @bind-Value="traveldocs.TravelEmail" class="form-control" placeholder="e.g. miaripes@gmail.com" />
+				<ValidationMessage For="@(() => traveldocs.TravelEmail)" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label>Start Date: </label>
+			<div>
+				<InputDate @bind-Value="@traveldocs.StartDate" class="form-control" />
+				<ValidationMessage For="@(() => traveldocs.StartDate)" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label>End Date: </label>
+			<div>
+				<InputDate @bind-Value="traveldocs.EndDate" class="form-control">
+				</InputDate>
+				<ValidationMessage For="@(() => traveldocs.EndDate)" />
+			</div>
+		</div>
+	</fieldset>
+	<br />
+	@if (!Disabled)
+	{
+		<button type="submit" class="btn btn-success btn-block">
+			@ButtonText
+		</button>
+	}
+
+	<BackToList Target="traveldocs" />
+</EditForm>
+
+@code {
+	[Parameter] public TravelDocs? traveldocs { get; set; }
+	[Parameter] public string ButtonText { get; set; } = "Save";
+	[Parameter] public EventCallback OnValidSubmit { get; set; }
+
+	[Parameter] public bool Disabled { get; set; } = false;
+}

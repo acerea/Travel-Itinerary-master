@@ -6,38 +6,11 @@
 <hr />
 <br />
 
-<EditForm Model="@destination" OnValidSubmit="CreateDestination">
-	<DataAnnotationsValidator />
-	<ValidationSummary />
+<FormComponent ButtonText="Create Destination" destination="destination" OnValidSubmit="@CreateDestination" />
 
-	<div class="form-group">
-		<label>Destination: </label>
-		<div>
-			<InputText @bind-Value="destination.DesName" class="form-control" placeholder="e.g. Trip to Manila" />
-			<ValidationMessage For="@(() => destination.DesName)" />
-		</div>
-	</div>
-
-	<br />
-
-	<button type="submit" class="btn btn-success btn-block">
-		Create Destination
-	</button>
-</EditForm>
 
 @code {
 	Destination destination = new Destination();
-
-
-	private IList<Destination>? Destination;
-
-	/*
-	protected async override Task OnInitializedAsync()
-	{
-		Destination = await _client.GetFromJsonAsync<List<Destination>>($"{Endpoints.DestinationEndpoint}");
-
-	}
-	*/
 
 	private async Task CreateDestination()
 	{

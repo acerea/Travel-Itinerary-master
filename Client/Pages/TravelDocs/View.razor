@@ -1,0 +1,18 @@
+﻿@page "/traveldocs/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>View Travel Document</h3>
+
+<FormComponent traveldocs="traveldocs" Disabled="true" />
+
+@code {
+	[Parameter] public int id { get; set; }
+	TravelDocs? traveldocs = new TravelDocs();
+
+	protected async override Task OnParametersSetAsync()
+	{
+		traveldocs = await
+		_client.GetFromJsonAsync<TravelDocs>($"{Endpoints.TravelDocsEndpoint}/{id}");
+	}
+}

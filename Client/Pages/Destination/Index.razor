@@ -31,10 +31,10 @@ else
 			<tr>
 				<td>@destination.DesName</td>
 				<td>
-					<a href="/colours/view/@destination.Id" class="btn btn-primary">
+					<a href="/destination/view/@destination.Id" class="btn btn-primary">
 						<span class= "oi oi-book"></span>	
 					</a>
-					<a href="/colours/view/@destination.Id" class="btn btn-warning">
+					<a href="/destination/edit/@destination.Id" class="btn btn-warning">
 						<span class= "oi oi-pencil"> </span>	
 					</a>
 					<button class="btn btn-danger" @onclick="@(()=>Delete(destination.Id))">

@@ -25,6 +25,7 @@ else
 				<th>Location</th>
 				<th>Email</th>
 				<th>Start Date</th>
+				<th>End Date</th>
 				<th>Duration in days</th>
 				<th>Actions</th>
 			</tr>
@@ -39,12 +40,17 @@ else
 				<td>@booking.BookingLocation</td>
 				<td>@booking.BookingEmail</td>
 				<td>@booking.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-				<td>@((booking.DateOut - booking.DateIn).TotalDays.ToString())</td>
+				<td>@booking.DateOut.Date.ToString("dd MMMM yyyy")</td>
+				@*<td>@((booking.DateOut - booking.DateIn).TotalDays.ToString())</td>*@
+				<td>
+					@(booking.DateOut != nullDT ? (booking.DateOut -
+						booking.DateIn).TotalDays.ToString() : "To Be Determined")
+				</td>
 				<td>
 					<a href="/Bookings/view/@booking.Id" class="btn btn-primary">
 						<span class= "oi oi-book"></span>	
 					</a>
-					<a href= "/Bookings/view/@booking.Id" class= "btn btn-warning">
+					<a href= "/Bookings/edit/@booking.Id" class= "btn btn-warning">
 						<span class= "oi oi-pencil"> </span>	
 					</a>
 					<button class = "btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
@@ -59,6 +65,7 @@ else
 
 @code {
 	private List<Booking>? Bookings;
+	private DateTime nullDT = new DateTime(1, 1, 1, 0, 0, 0);
 
 	protected async override Task OnInitializedAsync()
 	{
