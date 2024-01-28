@@ -3,8 +3,15 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
-<h3 class="card-title">Car Bookings</h3>
+<h3 class="card-title">Bookings Info</h3>
+<br />
 
+<a href="/bookings/create" class="btn btn-secondary">
+	<span class="oi oi-plus"></span>
+	Create New Booking
+</a>
+<br />
+<br />
 @if (Bookings == null){
 	<div class="alert alert-info">Loading Bookings...</div>
 }
@@ -14,10 +21,11 @@ else
 		<thead>
 			<tr>
 				<th>Booking Id</th>
-				<th>Customer License</th>
-				<th>Date</th>
+				<th>Customer Name</th>
+				<th>Location</th>
+				<th>Email</th>
+				<th>Start Date</th>
 				<th>Duration in days</th>
-				<th>Plate Number</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -27,10 +35,11 @@ else
 		{
 			<tr>
 				<td>@booking.Id</td>
-				<td>@booking.Customer.DrivingLicense</td>
+				<td>@booking.Customer.CusFirstName @booking.Customer.CusLastName</td>
+				<td>@booking.BookingLocation</td>
+				<td>@booking.BookingEmail</td>
 				<td>@booking.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-				<td>@((booking.DateIn - booking.DateOut).TotalDays.ToString())</td>
-				<td>@booking.Vehicle.LicensePlateNumber</td>
+				<td>@((booking.DateOut - booking.DateIn).TotalDays.ToString())</td>
 				<td>
 					<a href="/Bookings/view/@booking.Id" class="btn btn-primary">
 						<span class= "oi oi-book"></span>	

@@ -16,10 +16,10 @@ namespace Travel_Itinerary.Server.Data
         {
         }
 
-        public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<Colour> Colours { get; set; }
-        public DbSet<Make> Makes { get; set; }
-        public DbSet<Model> Models { get; set; }
+        //public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Destination> Destination { get; set; }
+        public DbSet<TravelDocs> TravelDocs { get; set; }
+        //public DbSet<Model> Models { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Booking> Bookings { get; set; }
 
@@ -28,11 +28,11 @@ namespace Travel_Itinerary.Server.Data
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration(new ColourSeedConfiguration());
+            builder.ApplyConfiguration(new DestinationSeedConfiguration());
 
-			builder.ApplyConfiguration(new MakeSeedConfiguration());
+			builder.ApplyConfiguration(new TravelDocsSeedConfiguration());
 
-			builder.ApplyConfiguration(new ModelSeedConfiguration());
+			//builder.ApplyConfiguration(new ModelSeedConfiguration());
 
 			builder.ApplyConfiguration(new RoleSeedConfiguration());
 

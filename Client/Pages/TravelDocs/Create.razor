@@ -1,0 +1,70 @@
+﻿@page "/traveldocs/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Travel Document</h3>
+<hr />
+<br />
+
+<EditForm Model="@traveldocs" OnValidSubmit="CreateTravelDocs">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<div class="form-group">
+		<label>Name: </label>
+		<div>
+			<InputText @bind-Value="traveldocs.TravelName" class="form-control" placeholder="e.g. Trip to Manila" />
+			<ValidationMessage For="@(() => traveldocs.TravelName)" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Name: </label>
+		<div>
+			<InputText @bind-Value="traveldocs.TravelEmail" class="form-control" placeholder="e.g. miaripes@gmail.com" />
+			<ValidationMessage For="@(() => traveldocs.TravelName)" />
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label>Start Date: </label>
+		<div>
+			<InputDate @bind-Value="@traveldocs.StartDate" class="form-control" />
+			<ValidationMessage For="@(() => traveldocs.StartDate)" />
+		</div>
+	</div>
+	
+
+	<div class="form-group">
+		<label>End Date: </label>
+		<div>
+			<InputDate @bind-Value="traveldocs.EndDate" class="form-control">
+			</InputDate>
+			<ValidationMessage For="@(() => traveldocs.EndDate)" />
+		</div>
+	</div>
+	<br />
+	<button type="submit" class="btn btn-success btn-block">
+		Create traveldocs
+	</button>
+</EditForm>
+
+@code {
+	TravelDocs traveldocs = new TravelDocs();
+
+
+	private IList<TravelDocs>? TravelDocs;
+
+	/*
+	protected async override Task OnInitializedAsync()
+	{
+		TravelDocs = await _client.GetFromJsonAsync<List<TravelDocs>>($"{Endpoints.TravelDocsEndpoint}");
+
+	}
+	*/
+
+	private async Task CreateTravelDocs()
+	{
+		await _client.PostAsJsonAsync(Endpoints.TravelDocsEndpoint, traveldocs);
+		_navManager.NavigateTo("/traveldocs/");
+	}
+}

@@ -4,24 +4,24 @@ using Travel_Itinerary.Shared.Domain;
 
 namespace Travel_Itinerary.Server.Configurations.Entities
 {
-    public class MakeSeedConfiguration : IEntityTypeConfiguration<Make>
+    public class TravelDocsSeedConfiguration : IEntityTypeConfiguration<TravelDocs>
     {
-        public void Configure(EntityTypeBuilder<Make> builder)
+        public void Configure(EntityTypeBuilder<TravelDocs> builder)
         {
             builder.HasData(
-                new Make
+                new TravelDocs
                 {
                     Id = 1,
-                    Name = "BMW",
+                    TravelName = "Trip to Paris",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",
                     UpdatedBy = "System"
                 },
-                new Make
+                new TravelDocs
                 {
                     Id = 2,
-                    Name = "Toyota",
+                    TravelName = "Trip to Amsterdam",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",

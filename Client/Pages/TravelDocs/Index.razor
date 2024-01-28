@@ -1,0 +1,80 @@
+﻿@page "/traveldocs/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Travel Documents</h3>
+<br />
+
+<a href="/traveldocs/create" class="btn btn-secondary">
+	<span class="oi oi-plus"></span>
+	Create New Travel Documents
+</a>
+<br />
+<br />
+@if (TravelDocs == null)
+{
+	<div class="alert alert-info">Loading Travel Documents...</div>
+}
+else
+{
+	<table class="table table-responsive">
+		<thead>
+			<tr>
+				<th>Trip Name</th>
+				<th>Used Email</th>
+				<th>Duration</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+	<tbody>
+		@foreach (var travelDocs in TravelDocs)
+		{
+			<tr>
+				<td>@travelDocs.TravelName</td>
+				<td>@travelDocs.TravelEmail</td>
+				<td>@((travelDocs.EndDate - travelDocs.StartDate).TotalDays.ToString())</td>
+				<td>
+					<a href="/travelDocs/view/@travelDocs.Id" class="btn btn-primary">
+						<span class= "oi oi-book"></span>	
+					</a>
+					<a href="/travelDocs/view/@travelDocs.Id" class="btn btn-warning">
+						<span class= "oi oi-pencil"> </span>	
+					</a>
+					<button class="btn btn-danger" @onclick="@(()=>Delete(travelDocs.Id))">
+						<span class= "oi oi-delete"> </span>
+					</button>
+				</td>
+			</tr>
+		}
+	</tbody>
+	</table>
+
+}
+
+
+@code {
+
+	private List<TravelDocs>? TravelDocs;
+
+	protected async override Task OnInitializedAsync()
+	{
+		TravelDocs = await _client.GetFromJsonAsync<List<TravelDocs>>($"{Endpoints.TravelDocsEndpoint}");
+	}
+
+	async Task Delete(int travelDocsId)
+	{
+		if (TravelDocs != null)
+		{
+			var travelDocs = TravelDocs.First(q => q.Id == travelDocsId);
+			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {travelDocs.TravelName}?");
+			if (confirm)
+			{
+				await _client.DeleteAsync($"{Endpoints.TravelDocsEndpoint}/{travelDocsId}");
+				await OnInitializedAsync();
+			}
+		}
+	}
+	
+}

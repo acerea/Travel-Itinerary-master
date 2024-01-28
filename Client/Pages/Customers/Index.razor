@@ -3,8 +3,15 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
-<h3 class="card-title">Car Customers</h3>
+<h3 class="card-title">Customer Details</h3>
+<br />
 
+<a href="/customers/create" class="btn btn-secondary">
+	<span class="oi oi-plus"></span>
+	Create New Customer
+</a>
+<br />
+<br />
 @if (Customers == null){
 	<div class="alert alert-info">Loading Customers...</div>
 }
@@ -13,7 +20,8 @@ else
 	<table class="table table-responsive">
 		<thead>
 			<tr>
-				<th>Driving License</th>
+				<th>Customer First Name</th>
+				<th>Customer Last Name</th>
 				<th>Contact Number</th>
 				<th>Email Address</th>
 				<th>Actions</th>
@@ -23,7 +31,8 @@ else
 		@foreach (var customer in Customers)
 		{
 			<tr>
-				<td>@customer.DrivingLicense</td>
+				<td>@customer.CusFirstName</td>
+				<td>@customer.CusLastName</td>
 				<td>@customer.ContactNumber</td>
 				<td>@customer.EmailAddress</td>
 				<td>
@@ -56,7 +65,7 @@ else
 		if (Customers != null)
 		{
 			var customer = Customers.First(q => q.Id == customerId);
-			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.DrivingLicense}?");
+			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.CusFirstName}?");
 			if (confirm)
 			{
 				await _client.DeleteAsync($"{Endpoints.CustomersEndpoint}/{customerId}");

@@ -396,7 +396,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6629d02-73a5-4291-b188-2c4506c4386e",
+                            ConcurrencyStamp = "a984a918-7262-4f69-abbe-d833f2f2f949",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -404,9 +404,9 @@ namespace Travel_Itinerary.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFZ8b9tTkF23+Fw/dz9ok2Gnt3t+piDZc3ApkFhmC1CkZkyU2gn83+YhKJ5fgH1evQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL2YrZSkfQtzs/QTj+NYb3vuBBq4bgEAZL7EEa4k+NrAjN+CiSrttCuk/5sYRFv7zA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a7e883b1-f23f-442f-9b1b-26fc796c4693",
+                            SecurityStamp = "86518cf9-0466-4e13-bcfa-8afed626111e",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -420,6 +420,15 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("BookingEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BookingLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BookingName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -429,76 +438,33 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateIn")
+                    b.Property<DateTime>("DateIn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateOut")
+                    b.Property<DateTime>("DateOut")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DestinationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TravelDocsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("VehicleId");
+                    b.HasIndex("DestinationId");
+
+                    b.HasIndex("TravelDocsId");
 
                     b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Colour", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Colours");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4507),
-                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4527),
-                            Name = "Black",
-                            UpdatedBy = "System"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4531),
-                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4532),
-                            Name = "Blue",
-                            UpdatedBy = "System"
-                        });
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Customer", b =>
@@ -509,13 +475,16 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CusFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CusLastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
@@ -524,16 +493,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DrivingLicense")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
@@ -544,7 +504,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Make", b =>
+            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Destination", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -552,8 +512,14 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BookingId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -561,7 +527,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("DesName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
@@ -569,30 +535,32 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Makes");
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Destination");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4962),
-                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4963),
-                            Name = "BMW",
+                            DateCreated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(713),
+                            DateUpdated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(734),
+                            DesName = "Paris",
                             UpdatedBy = "System"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4966),
-                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(4967),
-                            Name = "Toyota",
+                            DateCreated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(738),
+                            DateUpdated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(739),
+                            DesName = "Amsterdam",
                             UpdatedBy = "System"
                         });
                 });
 
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Model", b =>
+            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.TravelDocs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -600,8 +568,14 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BookingId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -609,7 +583,16 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TravelEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TravelName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
@@ -617,73 +600,33 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Models");
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("TravelDocs");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(5229),
-                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(5230),
-                            Name = "3 Series",
+                            DateCreated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(1417),
+                            DateUpdated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(1419),
+                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TravelName = "Trip to Paris",
                             UpdatedBy = "System"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(5233),
-                            DateUpdated = new DateTime(2024, 1, 13, 19, 46, 55, 148, DateTimeKind.Local).AddTicks(5233),
-                            Name = "X5",
+                            DateCreated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(1422),
+                            DateUpdated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(1423),
+                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TravelName = "Trip to Amsterdam",
                             UpdatedBy = "System"
                         });
-                });
-
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Vehicle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ColourId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LicensePlateNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MakeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ModelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColourId");
-
-                    b.HasIndex("MakeId");
-
-                    b.HasIndex("ModelId");
-
-                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -740,55 +683,46 @@ namespace Travel_Itinerary.Server.Data.Migrations
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Booking", b =>
                 {
                     b.HasOne("Travel_Itinerary.Shared.Domain.Customer", "Customer")
-                        .WithMany("Bookings")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Travel_Itinerary.Shared.Domain.Vehicle", "Vehicle")
+                    b.HasOne("Travel_Itinerary.Shared.Domain.Destination", null)
                         .WithMany("Bookings")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DestinationId");
+
+                    b.HasOne("Travel_Itinerary.Shared.Domain.TravelDocs", null)
+                        .WithMany("Bookings")
+                        .HasForeignKey("TravelDocsId");
 
                     b.Navigation("Customer");
-
-                    b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Vehicle", b =>
+            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Destination", b =>
                 {
-                    b.HasOne("Travel_Itinerary.Shared.Domain.Colour", "Colour")
+                    b.HasOne("Travel_Itinerary.Shared.Domain.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("ColourId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
-                    b.HasOne("Travel_Itinerary.Shared.Domain.Make", "Make")
-                        .WithMany()
-                        .HasForeignKey("MakeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Travel_Itinerary.Shared.Domain.Model", "Model")
-                        .WithMany()
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Colour");
-
-                    b.Navigation("Make");
-
-                    b.Navigation("Model");
+                    b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Customer", b =>
+            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.TravelDocs", b =>
+                {
+                    b.HasOne("Travel_Itinerary.Shared.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Destination", b =>
                 {
                     b.Navigation("Bookings");
                 });
 
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Vehicle", b =>
+            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.TravelDocs", b =>
                 {
                     b.Navigation("Bookings");
                 });
