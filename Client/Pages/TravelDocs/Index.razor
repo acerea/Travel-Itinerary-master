@@ -4,6 +4,9 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
+
 <h3 class="card-title">Travel Documents</h3>
 <br />
 
@@ -34,7 +37,6 @@ else
 			<tr>
 				<td>@travelDocs.TravelName</td>
 				<td>@travelDocs.TravelEmail</td>
-					<!--<td>@((travelDocs.EndDate - travelDocs.StartDate).TotalDays.ToString())</td>-->
 				<td>@(travelDocs.EndDate != null ? (travelDocs.EndDate.Value - travelDocs.StartDate).TotalDays.ToString() : "To Be Determined")</td>
 				<td>
 					<a href="/travelDocs/view/@travelDocs.Id" class="btn btn-primary">
@@ -61,6 +63,7 @@ else
 
 	protected async override Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		TravelDocs = await _client.GetFromJsonAsync<List<TravelDocs>>($"{Endpoints.TravelDocsEndpoint}");
 	}
 
@@ -78,4 +81,9 @@ else
 		}
 	}
 	
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
+	}
+
 }

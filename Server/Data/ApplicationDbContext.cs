@@ -16,10 +16,8 @@ namespace Travel_Itinerary.Server.Data
         {
         }
 
-        //public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Destination> Destination { get; set; }
         public DbSet<TravelDocs> TravelDocs { get; set; }
-        //public DbSet<Model> Models { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Booking> Bookings { get; set; }
 
@@ -32,7 +30,7 @@ namespace Travel_Itinerary.Server.Data
 
 			builder.ApplyConfiguration(new TravelDocsSeedConfiguration());
 
-			//builder.ApplyConfiguration(new ModelSeedConfiguration());
+			builder.ApplyConfiguration(new CustomerSeedConfiguration());
 
 			builder.ApplyConfiguration(new RoleSeedConfiguration());
 

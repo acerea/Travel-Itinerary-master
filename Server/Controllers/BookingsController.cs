@@ -30,6 +30,7 @@ namespace Travel_Itinerary.Server.Controllers
 
 		public async Task<IActionResult> GetBookings()
 		{
+			//return NotFound();
 			var Bookings = await _unitOfWork.Bookings.GetAll(includes: q => q.Include(x => x.Customer));
 			return Ok(Bookings);
 		}

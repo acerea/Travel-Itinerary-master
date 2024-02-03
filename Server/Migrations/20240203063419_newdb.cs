@@ -1,10 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Travel_Itinerary.Server.Data.Migrations
+#nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace Travel_Itinerary.Server.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    /// <inheritdoc />
+    public partial class newdb : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -26,6 +32,8 @@ namespace Travel_Itinerary.Server.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -47,6 +55,26 @@ namespace Travel_Itinerary.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CusFirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CusLastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DeviceCodes",
                 columns: table => new
                 {
@@ -58,7 +86,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50910, nullable: false)
+                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,11 +100,11 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Use = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
+                    Use = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Algorithm = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsX509Certificate = table.Column<bool>(type: "bit", nullable: false),
                     DataProtected = table.Column<bool>(type: "bit", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50910, nullable: false)
+                    Data = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,7 +124,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ConsumedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50910, nullable: false)
+                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,6 +237,144 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Destination",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DesName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    BookingId = table.Column<int>(type: "int", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Destination", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Destination_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TravelDocs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TravelName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TravelEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    BookingId = table.Column<int>(type: "int", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TravelDocs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TravelDocs_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bookings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateIn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOut = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BookingLocation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    BookingEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    GuestNumber = table.Column<double>(type: "float", nullable: false),
+                    DestinationId = table.Column<int>(type: "int", nullable: true),
+                    TravelDocsId = table.Column<int>(type: "int", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bookings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bookings_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Bookings_Destination_DestinationId",
+                        column: x => x.DestinationId,
+                        principalTable: "Destination",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Bookings_TravelDocs_TravelDocsId",
+                        column: x => x.TravelDocsId,
+                        principalTable: "TravelDocs",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", null, "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", null, "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "7fff2725-341c-4f7a-8c96-85c7ad5d058c", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEGbapIpSZKcdRryzlAayzX2AwiBc3WaaApK5w9oJwjQpa8v3ovE74puhpHwjcW7Mbg==", null, false, "4ca02038-0e19-4259-91bb-78d576df166e", false, "admin@localhost.com" });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "ContactNumber", "CreatedBy", "CusFirstName", "CusLastName", "DateCreated", "DateUpdated", "EmailAddress", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, "8170 2202", "System", "Juliana", "Florian", new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8527), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8529), "sv@yahoo.com", "System" },
+                    { 2, "8210 2202", "System", "Akari", "Rei", new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8532), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8532), "legends_a@gmail.com", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Destination",
+                columns: new[] { "Id", "BookingId", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "DesName", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, null, "System", null, new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7886), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7904), "Paris", "System" },
+                    { 2, null, "System", null, new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7913), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7913), "Amsterdam", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TravelDocs",
+                columns: new[] { "Id", "BookingId", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "EndDate", "StartDate", "TravelEmail", "TravelName", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, null, "System", null, new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8314), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8315), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "parni@yahoo.com", "Trip to Paris", "System" },
+                    { 2, null, "System", null, new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8317), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8318), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ameel@yahoo.com", "Trip to Amsterdam", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -249,6 +415,26 @@ namespace Travel_Itinerary.Server.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bookings_CustomerId",
+                table: "Bookings",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bookings_DestinationId",
+                table: "Bookings",
+                column: "DestinationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bookings_TravelDocsId",
+                table: "Bookings",
+                column: "TravelDocsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Destination_CustomerId",
+                table: "Destination",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -283,8 +469,14 @@ namespace Travel_Itinerary.Server.Data.Migrations
                 name: "IX_PersistedGrants_SubjectId_SessionId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "SessionId", "Type" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TravelDocs_CustomerId",
+                table: "TravelDocs",
+                column: "CustomerId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -303,6 +495,9 @@ namespace Travel_Itinerary.Server.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Bookings");
+
+            migrationBuilder.DropTable(
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
@@ -316,6 +511,15 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Destination");
+
+            migrationBuilder.DropTable(
+                name: "TravelDocs");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }

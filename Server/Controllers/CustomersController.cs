@@ -30,6 +30,7 @@ namespace Travel_Itinerary.Server.Controllers
 		
 		public async Task<IActionResult> GetCustomers()
 		{
+            //return NotFound();
 			var Customers = await _unitOfWork.Customers.GetAll();
 			return Ok(Customers);
 		}

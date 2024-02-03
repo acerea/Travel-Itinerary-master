@@ -31,6 +31,7 @@ namespace Travel_Itinerary.Server.Controllers
 		
 		public async Task<IActionResult> GetTravelDocs()
 		{
+			//return NotFound();
 			var traveldocs = await _unitOfWork.TravelDocs.GetAll();
 			return Ok(traveldocs);
 		}

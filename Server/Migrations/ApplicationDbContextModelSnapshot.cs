@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Travel_Itinerary.Server.Data;
 
 #nullable disable
 
-namespace Travel_Itinerary.Server.Data.Migrations
+namespace Travel_Itinerary.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240202063957_addApplicationTables")]
-    partial class addApplicationTables
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -399,7 +396,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5ef774b5-fda0-4ede-8933-977e6b35882b",
+                            ConcurrencyStamp = "7fff2725-341c-4f7a-8c96-85c7ad5d058c",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -407,9 +404,9 @@ namespace Travel_Itinerary.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENNimyI3HKscfGZ5NKOZ0VRrg/BJegupy5OjGMzQ9fYdLTXNYHusRLoV/mR+aIIywA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGbapIpSZKcdRryzlAayzX2AwiBc3WaaApK5w9oJwjQpa8v3ovE74puhpHwjcW7Mbg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3c714231-f9e1-4343-a00d-60912137d650",
+                            SecurityStamp = "4ca02038-0e19-4259-91bb-78d576df166e",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -448,7 +445,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOut")
+                    b.Property<DateTime?>("DateOut")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateUpdated")
@@ -518,6 +515,32 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContactNumber = "8170 2202",
+                            CreatedBy = "System",
+                            CusFirstName = "Juliana",
+                            CusLastName = "Florian",
+                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8527),
+                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8529),
+                            EmailAddress = "sv@yahoo.com",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ContactNumber = "8210 2202",
+                            CreatedBy = "System",
+                            CusFirstName = "Akari",
+                            CusLastName = "Rei",
+                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8532),
+                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8532),
+                            EmailAddress = "legends_a@gmail.com",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Destination", b =>
@@ -562,8 +585,8 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(1611),
-                            DateUpdated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(1631),
+                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7886),
+                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7904),
                             DesName = "Paris",
                             UpdatedBy = "System"
                         },
@@ -571,8 +594,8 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(1636),
-                            DateUpdated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(1637),
+                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7913),
+                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7913),
                             DesName = "Amsterdam",
                             UpdatedBy = "System"
                         });
@@ -630,8 +653,8 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(2291),
-                            DateUpdated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(2293),
+                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8314),
+                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8315),
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TravelEmail = "parni@yahoo.com",
                             TravelName = "Trip to Paris",
@@ -641,8 +664,8 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(2299),
-                            DateUpdated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(2300),
+                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8317),
+                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8318),
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TravelEmail = "ameel@yahoo.com",
                             TravelName = "Trip to Amsterdam",
