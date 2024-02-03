@@ -17,11 +17,9 @@ namespace Travel_Itinerary.Server.Repository
     {
         private readonly ApplicationDbContext _context;
         private IGenericRepository<TravelDocs> _traveldocs;
-        //private IGenericRepository<Model> _models;
         private IGenericRepository<Destination> _destination;
         private IGenericRepository<Booking> _bookings;
         private IGenericRepository<Customer> _customers;
-        //private IGenericRepository<Vehicle> _vehicles;
 
         private UserManager<ApplicationUser> _userManager;
 
@@ -33,17 +31,10 @@ namespace Travel_Itinerary.Server.Repository
 
         public IGenericRepository<TravelDocs> TravelDocs
             => _traveldocs ??= new GenericRepository<TravelDocs>(_context);
-        /*
-
-        public IGenericRepository<Model> Models
-            => _models ??= new GenericRepository<Model>(_context);
-        */
+      
         public IGenericRepository<Destination> Destination
             => _destination ??= new GenericRepository<Destination>(_context);
-        /*
-        public IGenericRepository<Vehicle> Vehicles
-            => _vehicles ??= new GenericRepository<Vehicle>(_context);
-        */
+       
         public IGenericRepository<Booking> Bookings
             => _bookings ??= new GenericRepository<Booking>(_context);
         public IGenericRepository<Customer> Customers

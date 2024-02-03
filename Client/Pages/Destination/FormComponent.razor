@@ -5,7 +5,7 @@
 		<div class="form-group">
 			<label>Destination: </label>
 			<div>
-				<InputText @bind-Value="destination.DesName" class="form-control" placeholder="e.g. Trip to Manila" />
+				<InputText @bind-Value="destination.DesName" class="form-control" placeholder="e.g. Manila" />
 				<ValidationMessage For="@(() => destination.DesName)" />
 			</div>
 		</div>
@@ -18,7 +18,7 @@
 			@ButtonText
 		</button>
 	}
-	
+	<tab/>
 	<BackToList Target="destination" />
 </EditForm>
 

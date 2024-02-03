@@ -30,7 +30,8 @@ namespace Travel_Itinerary.Server.Controllers
 	
 		public async Task<IActionResult> GetDestination()
 		{
-			var Destination = await _unitOfWork.Destination.GetAll();
+            var Destination = await _unitOfWork.Destination.GetAll();
+                //includes: q => q.Include(x => x.Customer).Include(x => x.Bookings));
 			return Ok(Destination);
 		}
 		// GET: api/Destination/5

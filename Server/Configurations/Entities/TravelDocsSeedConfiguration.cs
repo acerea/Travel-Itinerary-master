@@ -13,6 +13,7 @@ namespace Travel_Itinerary.Server.Configurations.Entities
                 {
                     Id = 1,
                     TravelName = "Trip to Paris",
+                    TravelEmail = "parni@yahoo.com",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",
@@ -22,7 +23,8 @@ namespace Travel_Itinerary.Server.Configurations.Entities
                 {
                     Id = 2,
                     TravelName = "Trip to Amsterdam",
-                    DateCreated = DateTime.Now,
+					TravelEmail = "ameel@yahoo.com",
+					DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",
                     UpdatedBy = "System"

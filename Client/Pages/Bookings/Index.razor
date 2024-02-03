@@ -26,7 +26,7 @@ else
 				<th>Email</th>
 				<th>Start Date</th>
 				<th>End Date</th>
-				<th>Duration in days</th>
+				<th>Number of Guests</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -39,13 +39,13 @@ else
 				<td>@booking.Customer.CusFirstName @booking.Customer.CusLastName</td>
 				<td>@booking.BookingLocation</td>
 				<td>@booking.BookingEmail</td>
-				<td>@booking.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-				<td>@booking.DateOut.Date.ToString("dd MMMM yyyy")</td>
-				@*<td>@((booking.DateOut - booking.DateIn).TotalDays.ToString())</td>*@
 				<td>
-					@(booking.DateOut != nullDT ? (booking.DateOut -
-						booking.DateIn).TotalDays.ToString() : "To Be Determined")
+					@(booking.DateIn.HasValue ? booking.DateIn.Value.ToString("dd MMMM yyyy") : "--/--/----")
 				</td>
+				<td>
+					@(booking.DateOut.HasValue ? booking.DateOut.Value.ToString("dd MMMM yyyy") : "--/--/----")
+				</td>
+				<td>@booking.GuestNumber</td>
 				<td>
 					<a href="/Bookings/view/@booking.Id" class="btn btn-primary">
 						<span class= "oi oi-book"></span>	
@@ -65,7 +65,6 @@ else
 
 @code {
 	private List<Booking>? Bookings;
-	private DateTime nullDT = new DateTime(1, 1, 1, 0, 0, 0);
 
 	protected async override Task OnInitializedAsync()
 	{
@@ -85,5 +84,5 @@ else
 			}
 		}
 	}
-	
+
 }

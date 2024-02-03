@@ -34,7 +34,8 @@ else
 			<tr>
 				<td>@travelDocs.TravelName</td>
 				<td>@travelDocs.TravelEmail</td>
-				<td>@((travelDocs.EndDate - travelDocs.StartDate).TotalDays.ToString())</td>
+					<!--<td>@((travelDocs.EndDate - travelDocs.StartDate).TotalDays.ToString())</td>-->
+				<td>@(travelDocs.EndDate != null ? (travelDocs.EndDate.Value - travelDocs.StartDate).TotalDays.ToString() : "To Be Determined")</td>
 				<td>
 					<a href="/travelDocs/view/@travelDocs.Id" class="btn btn-primary">
 						<span class= "oi oi-book"></span>	

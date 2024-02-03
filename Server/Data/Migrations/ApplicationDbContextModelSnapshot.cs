@@ -396,7 +396,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a984a918-7262-4f69-abbe-d833f2f2f949",
+                            ConcurrencyStamp = "5ef774b5-fda0-4ede-8933-977e6b35882b",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -404,9 +404,9 @@ namespace Travel_Itinerary.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL2YrZSkfQtzs/QTj+NYb3vuBBq4bgEAZL7EEa4k+NrAjN+CiSrttCuk/5sYRFv7zA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENNimyI3HKscfGZ5NKOZ0VRrg/BJegupy5OjGMzQ9fYdLTXNYHusRLoV/mR+aIIywA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "86518cf9-0466-4e13-bcfa-8afed626111e",
+                            SecurityStamp = "3c714231-f9e1-4343-a00d-60912137d650",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -421,10 +421,13 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BookingEmail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BookingLocation")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("BookingName")
                         .HasColumnType("nvarchar(max)");
@@ -438,7 +441,8 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateIn")
+                    b.Property<DateTime?>("DateIn")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOut")
@@ -449,6 +453,9 @@ namespace Travel_Itinerary.Server.Data.Migrations
 
                     b.Property<int?>("DestinationId")
                         .HasColumnType("int");
+
+                    b.Property<double>("GuestNumber")
+                        .HasColumnType("float");
 
                     b.Property<int?>("TravelDocsId")
                         .HasColumnType("int");
@@ -476,16 +483,21 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ContactNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CusFirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("CusLastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -494,6 +506,7 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmailAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
@@ -528,7 +541,9 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DesName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -544,8 +559,8 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(713),
-                            DateUpdated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(734),
+                            DateCreated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(1611),
+                            DateUpdated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(1631),
                             DesName = "Paris",
                             UpdatedBy = "System"
                         },
@@ -553,8 +568,8 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(738),
-                            DateUpdated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(739),
+                            DateCreated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(1636),
+                            DateUpdated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(1637),
                             DesName = "Amsterdam",
                             UpdatedBy = "System"
                         });
@@ -583,17 +598,20 @@ namespace Travel_Itinerary.Server.Data.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TravelEmail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TravelName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -609,10 +627,10 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(1417),
-                            DateUpdated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(1419),
-                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(2291),
+                            DateUpdated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(2293),
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TravelEmail = "parni@yahoo.com",
                             TravelName = "Trip to Paris",
                             UpdatedBy = "System"
                         },
@@ -620,10 +638,10 @@ namespace Travel_Itinerary.Server.Data.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(1422),
-                            DateUpdated = new DateTime(2024, 1, 27, 12, 43, 41, 833, DateTimeKind.Local).AddTicks(1423),
-                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(2299),
+                            DateUpdated = new DateTime(2024, 2, 2, 14, 39, 56, 987, DateTimeKind.Local).AddTicks(2300),
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TravelEmail = "ameel@yahoo.com",
                             TravelName = "Trip to Amsterdam",
                             UpdatedBy = "System"
                         });

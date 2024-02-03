@@ -11,8 +11,6 @@ namespace Travel_Itinerary.Server.IRepository
     {
         Task Save(HttpContext httpContext);
         IGenericRepository<TravelDocs> TravelDocs { get; }
-        //IGenericRepository<Model> Models { get; }
-        //IGenericRepository<Vehicle> Vehicles { get; }
         IGenericRepository<Destination> Destination { get; }
         IGenericRepository<Booking> Bookings { get; }
         IGenericRepository<Customer> Customers { get; }
