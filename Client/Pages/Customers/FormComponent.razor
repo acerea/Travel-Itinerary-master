@@ -22,7 +22,7 @@
 		<div class="form-group">
 			<label>Contact Number: </label>
 			<div>
-				<InputText @bind-Value="customer.ContactNumber" class="form-control" placeholder="e.g. 9078 5676" />
+				<InputText @bind-Value="customer.ContactNumber" class="form-control" placeholder="e.g. 90785676" />
 				<ValidationMessage For="@(() => customer.ContactNumber)" />
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 		<div class="form-group">
 			<label>Email Address: </label>
 			<div>
-				<InputText @bind-Value="customer.EmailAddress" class="form-control" placeholder="e.g. miaripes@gmail.com" />
+				<InputText @bind-Value="customer.EmailAddress" class="form-control" placeholder="e.g. tulasmith@gmail.com" />
 				<ValidationMessage For="@(() => customer.EmailAddress)" />
 			</div>
 		</div>
@@ -39,12 +39,11 @@
 	<br />
 	@if (!Disabled)
 	{
-		<button type="submit" class="btn btn-success btn-block">
+		<button type="submit" class="btn btn-yv btn-block">
 			@ButtonText
 		</button>
 	}
-	<tab />
-	<BackToList Target="customers" />
+	
 </EditForm>
 
 @code {

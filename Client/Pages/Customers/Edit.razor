@@ -6,6 +6,9 @@
 
 <FormComponent ButtonText="Update" OnValidSubmit="EditCustomer" customer="customer" />
 
+<tab />
+<BackToList Target="customers" />
+
 @code {
 	[Parameter] public int id { get; set; }
 	Customer? customer = new Customer();

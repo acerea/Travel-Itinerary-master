@@ -6,7 +6,7 @@
 <hr />
 <br />
 
-<FormComponent ButtonText="Create Customer" customer="customer" OnValidSubmit="@CreateCustomer" />
+<FormComponent ButtonText="Create Customer →" customer="customer" OnValidSubmit="@CreateCustomer" />
 
 @code {
 	Customer customer = new Customer();
@@ -14,6 +14,6 @@
 	private async Task CreateCustomer()
 	{
 		await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, customer);
-		_navManager.NavigateTo("/customers/");
+		_navManager.NavigateTo("/viewTravelDesCus/");
 	}
 }

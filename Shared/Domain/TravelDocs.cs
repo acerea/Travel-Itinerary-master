@@ -22,11 +22,7 @@ namespace Travel_Itinerary.Shared.Domain
 		[DataType(DataType.Date)]
 		public DateTime StartDate { get; set; }
 		public DateTime? EndDate { get; set; }
-		public int? CustomerId { get; set; }
-		public virtual Customer? Customer { get; set; }
-		public int? BookingId { get; set; }
-		public virtual List<Booking>? Bookings { get; set; }
-
+	
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
 			if (EndDate != null)

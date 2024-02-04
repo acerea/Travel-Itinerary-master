@@ -1,0 +1,36 @@
+﻿@page "/viewTravelDesCus/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+@inject HttpInterceptorService _interceptor
+
+
+<br />
+<br />
+<div>
+	<h2 class="main">Success!</h2>
+	<br />
+	<p style="text-align:center">You have successfully submitted. Select one of the below to view all info of each feature, or move on to Bookings.</p>
+	<br />
+</div>
+	
+
+<div>
+	<a href="/traveldocs/" class="btn btn-yv-view btn-block">
+		View Travel Documents
+	</a>
+	<a href="/destination/" class="btn btn-yv-view btn-block">
+		View Destination
+	</a>
+	<a href="/customers/" class="btn btn-yv-view btn-block">
+		View Customers
+	</a>
+
+	<br />
+	<br />
+
+	<a href="/bookings/" class="btn btn-yv-to btn-block">
+		Go To Bookings →
+	</a>
+</div>

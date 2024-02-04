@@ -31,7 +31,7 @@ namespace Travel_Itinerary.Server.Controllers
 		public async Task<IActionResult> GetBookings()
 		{
 			//return NotFound();
-			var Bookings = await _unitOfWork.Bookings.GetAll(includes: q => q.Include(x => x.Customer));
+			var Bookings = await _unitOfWork.Bookings.GetAll(includes: q => q.Include(x => x.Customer).Include(x => x.TravelDocs));
 			return Ok(Bookings);
 		}
 		// GET: api/Bookings/5

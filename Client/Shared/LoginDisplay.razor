@@ -2,30 +2,19 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject NavigationManager Navigation
 
+
+<div>
+    <h3 class="main">YouVoyage</h3>
+</div>
+
 <AuthorizeView>
     <Authorized>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href= "authentication/profile" Match="NavLinkMatch.All">
-                <span class="oi oi-person" aria-hidden="true"></span> @context.User.Identity?.Name!
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="#" @onclick="BeginLogOut" Match="NavLinkMatch.All">
-                <span class="oi oi-account-logout" aria-hidden="true"></span> Log out
-            </NavLink>
-        </div>
+        <a href="authentication/profile" class="btn btn-login-yv btn-block">Hello, @context.User.Identity?.Name!</a>
+        <button class="btn btn-login-yv btn-block" @onclick="BeginLogOut">Log out</button>
     </Authorized>
     <NotAuthorized>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="authentication/register" Match="NavLinkMatch.All">
-                <span class="oi oi-person" aria-hidden="true"></span> Register
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="authentication/login" Match="NavLinkMatch.All">
-                <span class="oi oi-account-login" aria-hidden="true"></span> Log in
-            </NavLink>
-        </div>
+        <a href="authentication/register" class="btn btn-login-yv btn-block">Register</a>
+        <a href="authentication/login" class="btn btn-login-yv btn-block">Log in</a>
     </NotAuthorized>
 </AuthorizeView>
 

@@ -21,11 +21,12 @@ namespace Travel_Itinerary.Shared.Domain
 		public string? BookingEmail { get; set; }
 		public int CustomerId { get; set; }
         public virtual Customer? Customer { get; set; }
+
+		public int TravelDocsId { get; set; }
+		public virtual TravelDocs? TravelDocs { get; set; }
 		[Required]
 		[DataType(DataType.Currency, ErrorMessage = "Number of Guests must be a valid number")]
 		[RegularExpression(@"^[+]?\d+([.]\d+)?$", ErrorMessage = "Number of Guests cannot be a negative number")]
-		//[RegularExpression(@"^[+]?\d+([.]\d+)?$", ErrorMessage = "Number of Guests cannot be zero")]
-
 		public double GuestNumber { get; set; }
 
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

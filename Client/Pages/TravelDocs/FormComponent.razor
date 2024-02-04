@@ -5,14 +5,14 @@
 		<div class="form-group">
 			<label>Name: </label>
 			<div>
-				<InputText @bind-Value="traveldocs.TravelName" class="form-control" placeholder="e.g. Trip to Manila" />
+				<InputText @bind-Value="traveldocs.TravelName" class="form-control" placeholder="e.g. Trip to Africa" />
 				<ValidationMessage For="@(() => traveldocs.TravelName)" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label>Name: </label>
+			<label>Used Email: </label>
 			<div>
-				<InputText @bind-Value="traveldocs.TravelEmail" class="form-control" placeholder="e.g. miaripes@gmail.com" />
+				<InputText @bind-Value="traveldocs.TravelEmail" class="form-control" placeholder="e.g. tulasmith@gmail.com" />
 				<ValidationMessage For="@(() => traveldocs.TravelEmail)" />
 			</div>
 		</div>
@@ -37,12 +37,12 @@
 	<br />
 	@if (!Disabled)
 	{
-		<button type="submit" class="btn btn-success btn-block">
+		<button type="submit" class="btn btn-yv btn-block">
 			@ButtonText
 		</button>
 	}
-	<tab />
-	<BackToList Target="traveldocs" />
+	@*<tab />
+	<BackToList Target="traveldocs" />*@
 </EditForm>
 
 @code {

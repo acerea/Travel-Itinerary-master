@@ -5,7 +5,7 @@
 		<div class="form-group">
 			<label>Destination: </label>
 			<div>
-				<InputText @bind-Value="destination.DesName" class="form-control" placeholder="e.g. Manila" />
+				<InputText @bind-Value="destination.DesName" class="form-control" placeholder="e.g. Africa" />
 				<ValidationMessage For="@(() => destination.DesName)" />
 			</div>
 		</div>
@@ -14,12 +14,12 @@
 	<br />
 	@if (!Disabled)
 	{
-		<button type="submit" class="btn btn-success btn-block">
+		<button type="submit" class="btn btn-yv btn-block">
 			@ButtonText
 		</button>
 	}
-	<tab/>
-	<BackToList Target="destination" />
+	@*<tab/>
+	<BackToList Target="destination" />*@
 </EditForm>
 
 @code {

@@ -396,7 +396,7 @@ namespace Travel_Itinerary.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7fff2725-341c-4f7a-8c96-85c7ad5d058c",
+                            ConcurrencyStamp = "79b48ccb-1d97-427a-80c7-72d6edeadc8a",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -404,9 +404,9 @@ namespace Travel_Itinerary.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGbapIpSZKcdRryzlAayzX2AwiBc3WaaApK5w9oJwjQpa8v3ovE74puhpHwjcW7Mbg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBKIRBN5jjSJdlMj0gm4uqeCk8glg/g96UhUkfGDVJUpKoHalW2u+XbD/tjeZtNtYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4ca02038-0e19-4259-91bb-78d576df166e",
+                            SecurityStamp = "dcabef5c-0429-4d0f-880e-c613d24f5b8a",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -457,7 +457,7 @@ namespace Travel_Itinerary.Server.Migrations
                     b.Property<double>("GuestNumber")
                         .HasColumnType("float");
 
-                    b.Property<int?>("TravelDocsId")
+                    b.Property<int>("TravelDocsId")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -524,8 +524,8 @@ namespace Travel_Itinerary.Server.Migrations
                             CreatedBy = "System",
                             CusFirstName = "Juliana",
                             CusLastName = "Florian",
-                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8527),
-                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8529),
+                            DateCreated = new DateTime(2024, 2, 4, 23, 29, 10, 775, DateTimeKind.Local).AddTicks(259),
+                            DateUpdated = new DateTime(2024, 2, 4, 23, 29, 10, 775, DateTimeKind.Local).AddTicks(261),
                             EmailAddress = "sv@yahoo.com",
                             UpdatedBy = "System"
                         },
@@ -536,8 +536,8 @@ namespace Travel_Itinerary.Server.Migrations
                             CreatedBy = "System",
                             CusFirstName = "Akari",
                             CusLastName = "Rei",
-                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8532),
-                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8532),
+                            DateCreated = new DateTime(2024, 2, 4, 23, 29, 10, 775, DateTimeKind.Local).AddTicks(266),
+                            DateUpdated = new DateTime(2024, 2, 4, 23, 29, 10, 775, DateTimeKind.Local).AddTicks(268),
                             EmailAddress = "legends_a@gmail.com",
                             UpdatedBy = "System"
                         });
@@ -585,8 +585,8 @@ namespace Travel_Itinerary.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7886),
-                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7904),
+                            DateCreated = new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(3823),
+                            DateUpdated = new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(4012),
                             DesName = "Paris",
                             UpdatedBy = "System"
                         },
@@ -594,8 +594,8 @@ namespace Travel_Itinerary.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7913),
-                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7913),
+                            DateCreated = new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(4075),
+                            DateUpdated = new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(4084),
                             DesName = "Amsterdam",
                             UpdatedBy = "System"
                         });
@@ -609,14 +609,8 @@ namespace Travel_Itinerary.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BookingId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -644,8 +638,6 @@ namespace Travel_Itinerary.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("TravelDocs");
 
                     b.HasData(
@@ -653,22 +645,22 @@ namespace Travel_Itinerary.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8314),
-                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8315),
+                            DateCreated = new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(8257),
+                            DateUpdated = new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(8262),
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TravelEmail = "parni@yahoo.com",
-                            TravelName = "Trip to Paris",
+                            TravelName = "Singapore to Paris",
                             UpdatedBy = "System"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8317),
-                            DateUpdated = new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8318),
+                            DateCreated = new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(8283),
+                            DateUpdated = new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(8284),
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TravelEmail = "ameel@yahoo.com",
-                            TravelName = "Trip to Amsterdam",
+                            TravelName = "Amsterdam Adventure",
                             UpdatedBy = "System"
                         });
                 });
@@ -736,11 +728,15 @@ namespace Travel_Itinerary.Server.Migrations
                         .WithMany("Bookings")
                         .HasForeignKey("DestinationId");
 
-                    b.HasOne("Travel_Itinerary.Shared.Domain.TravelDocs", null)
-                        .WithMany("Bookings")
-                        .HasForeignKey("TravelDocsId");
+                    b.HasOne("Travel_Itinerary.Shared.Domain.TravelDocs", "TravelDocs")
+                        .WithMany()
+                        .HasForeignKey("TravelDocsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
+
+                    b.Navigation("TravelDocs");
                 });
 
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Destination", b =>
@@ -752,21 +748,7 @@ namespace Travel_Itinerary.Server.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.TravelDocs", b =>
-                {
-                    b.HasOne("Travel_Itinerary.Shared.Domain.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("Travel_Itinerary.Shared.Domain.Destination", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("Travel_Itinerary.Shared.Domain.TravelDocs", b =>
                 {
                     b.Navigation("Bookings");
                 });

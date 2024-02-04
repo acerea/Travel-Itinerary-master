@@ -1,9 +1,37 @@
-﻿@page "/"
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
 
-<PageTitle>Index</PageTitle>
+@page "/"
 
-<h1>Hello, world!</h1>
+<PageTitle>YouVoyage</PageTitle>
 
-Welcome to Travel Itinerary new app.
+<br />
+<br />
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<body>
+	<div>
+		<h1 class="main">YouVoyage</h1>
+		<br />
+		<h3 style="text-align:center">Welcome!</h3>
+
+		<p style="text-align:center">In this app, you can fill in your personal details and your basic travel details! Click the button below to begin!</p>
+	</div>
+
+</body>
+<br />
+<br />
+
+<div>
+	<a href="/traveldocs/create/" class="btn btn-yv btn-block">
+		Get Started!
+	</a>
+</div>
+
+
+@code {
+	private void BeginLogOut()
+	{
+		Navigation.NavigateToLogout("authentication/logout");
+	}
+}

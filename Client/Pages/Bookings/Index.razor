@@ -23,7 +23,7 @@ else
 	<table class="table table-responsive" id="bookingsTable">
 		<thead>
 			<tr>
-				<th>Booking Id</th>
+				<th>Trip Name</th>
 				<th>Customer Name</th>
 				<th>Location</th>
 				<th>Email</th>
@@ -38,7 +38,7 @@ else
 		@foreach (var booking in Bookings)
 		{
 			<tr>
-				<td>@booking.Id</td>
+				<td>@booking.TravelDocs.TravelName</td>
 				<td>@booking.Customer.CusFirstName @booking.Customer.CusLastName</td>
 				<td>@booking.BookingLocation</td>
 				<td>@booking.BookingEmail</td>
@@ -64,6 +64,13 @@ else
 		}
 	</tbody>
 	</table>
+
+	<BackToList Target="viewTravelDesCus" />
+	<tab />
+	<a href="/" class="btn btn-yv btn-block">
+		Return to Home
+	</a>
+	
 }
 
 @code {

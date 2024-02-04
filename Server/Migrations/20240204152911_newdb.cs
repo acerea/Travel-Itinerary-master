@@ -132,6 +132,26 @@ namespace Travel_Itinerary.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TravelDocs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TravelName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TravelEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TravelDocs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -262,33 +282,6 @@ namespace Travel_Itinerary.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TravelDocs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TravelName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    TravelEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    BookingId = table.Column<int>(type: "int", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TravelDocs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TravelDocs_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Bookings",
                 columns: table => new
                 {
@@ -300,9 +293,9 @@ namespace Travel_Itinerary.Server.Migrations
                     BookingLocation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     BookingEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
+                    TravelDocsId = table.Column<int>(type: "int", nullable: false),
                     GuestNumber = table.Column<double>(type: "float", nullable: false),
                     DestinationId = table.Column<int>(type: "int", nullable: true),
-                    TravelDocsId = table.Column<int>(type: "int", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -326,7 +319,8 @@ namespace Travel_Itinerary.Server.Migrations
                         name: "FK_Bookings_TravelDocs_TravelDocsId",
                         column: x => x.TravelDocsId,
                         principalTable: "TravelDocs",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -341,15 +335,15 @@ namespace Travel_Itinerary.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "7fff2725-341c-4f7a-8c96-85c7ad5d058c", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEGbapIpSZKcdRryzlAayzX2AwiBc3WaaApK5w9oJwjQpa8v3ovE74puhpHwjcW7Mbg==", null, false, "4ca02038-0e19-4259-91bb-78d576df166e", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "79b48ccb-1d97-427a-80c7-72d6edeadc8a", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEBKIRBN5jjSJdlMj0gm4uqeCk8glg/g96UhUkfGDVJUpKoHalW2u+XbD/tjeZtNtYA==", null, false, "dcabef5c-0429-4d0f-880e-c613d24f5b8a", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "ContactNumber", "CreatedBy", "CusFirstName", "CusLastName", "DateCreated", "DateUpdated", "EmailAddress", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "8170 2202", "System", "Juliana", "Florian", new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8527), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8529), "sv@yahoo.com", "System" },
-                    { 2, "8210 2202", "System", "Akari", "Rei", new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8532), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8532), "legends_a@gmail.com", "System" }
+                    { 1, "8170 2202", "System", "Juliana", "Florian", new DateTime(2024, 2, 4, 23, 29, 10, 775, DateTimeKind.Local).AddTicks(259), new DateTime(2024, 2, 4, 23, 29, 10, 775, DateTimeKind.Local).AddTicks(261), "sv@yahoo.com", "System" },
+                    { 2, "8210 2202", "System", "Akari", "Rei", new DateTime(2024, 2, 4, 23, 29, 10, 775, DateTimeKind.Local).AddTicks(266), new DateTime(2024, 2, 4, 23, 29, 10, 775, DateTimeKind.Local).AddTicks(268), "legends_a@gmail.com", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -357,17 +351,17 @@ namespace Travel_Itinerary.Server.Migrations
                 columns: new[] { "Id", "BookingId", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "DesName", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, null, "System", null, new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7886), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7904), "Paris", "System" },
-                    { 2, null, "System", null, new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7913), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(7913), "Amsterdam", "System" }
+                    { 1, null, "System", null, new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(3823), new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(4012), "Paris", "System" },
+                    { 2, null, "System", null, new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(4075), new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(4084), "Amsterdam", "System" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TravelDocs",
-                columns: new[] { "Id", "BookingId", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "EndDate", "StartDate", "TravelEmail", "TravelName", "UpdatedBy" },
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "EndDate", "StartDate", "TravelEmail", "TravelName", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, null, "System", null, new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8314), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8315), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "parni@yahoo.com", "Trip to Paris", "System" },
-                    { 2, null, "System", null, new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8317), new DateTime(2024, 2, 3, 14, 34, 19, 346, DateTimeKind.Local).AddTicks(8318), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ameel@yahoo.com", "Trip to Amsterdam", "System" }
+                    { 1, "System", new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(8257), new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(8262), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "parni@yahoo.com", "Singapore to Paris", "System" },
+                    { 2, "System", new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(8283), new DateTime(2024, 2, 4, 23, 29, 10, 774, DateTimeKind.Local).AddTicks(8284), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ameel@yahoo.com", "Amsterdam Adventure", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -469,11 +463,6 @@ namespace Travel_Itinerary.Server.Migrations
                 name: "IX_PersistedGrants_SubjectId_SessionId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "SessionId", "Type" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TravelDocs_CustomerId",
-                table: "TravelDocs",
-                column: "CustomerId");
         }
 
         /// <inheritdoc />

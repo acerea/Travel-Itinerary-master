@@ -99,3 +99,65 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+.main {
+    font-family: Trebuchet MS;
+    text-align: center;
+    color: #00f0ff;
+}
+.btn-login-yv {
+    background-color: #00f0ff;
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Trebuchet MS;
+}
+
+.btn-yv {
+    background-color: #00f0ff;
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: Trebuchet MS;
+    position: relative;
+    top: 50%;
+    left: 45%;
+}
+
+.btn-yv-view {
+    background-color: #00f0ff;
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: Trebuchet MS;
+    position: relative;
+    left: 29%;
+}
+
+.btn-yv-to {
+    background-color: #f69000;
+    color: black;
+    padding: 10px;
+    text-align: right;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: Trebuchet MS;
+    position: relative;
+    top: 50%;
+    left: 43%;
+}

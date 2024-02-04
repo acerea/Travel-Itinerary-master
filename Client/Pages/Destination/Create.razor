@@ -6,8 +6,7 @@
 <hr />
 <br />
 
-<FormComponent ButtonText="Create Destination" destination="destination" OnValidSubmit="@CreateDestination" />
-
+<FormComponent ButtonText="Create Destination →" destination="destination" OnValidSubmit="@CreateDestination" />
 
 @code {
 	Destination destination = new Destination();
@@ -15,6 +14,6 @@
 	private async Task CreateDestination()
 	{
 		await _client.PostAsJsonAsync(Endpoints.DestinationEndpoint, destination);
-		_navManager.NavigateTo("/destination/");
+		_navManager.NavigateTo("/customers/create/");
 	}
 }

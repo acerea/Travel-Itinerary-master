@@ -6,6 +6,9 @@
 
 <FormComponent ButtonText="Update" OnValidSubmit="EditTravelDocs" traveldocs="traveldocs" />
 
+<tab />
+<BackToList Target="traveldocs" />
+
 @code {
 	[Parameter] public int id { get; set; }
 	TravelDocs? traveldocs = new TravelDocs();
